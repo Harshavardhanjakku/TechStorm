@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Only Table</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .card { width: 80%; margin: auto; text-align: center; }
+        .table-title h2 { margin-bottom: 10px; }
+        .button-container { margin-bottom: 20px; }
+        .table-display { margin: 10px 0; }
+        .pagination { margin-top: 10px; }
+        .pagination label { margin: 0 5px; cursor: pointer; }
+        .disabled { opacity: 0.5; pointer-events: none; }
+        .active { font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; }
+
+
+        body {
+  font-family: "Open Sans", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.table-concept {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.table-title {
+  color: #ffffff;
+  background-color: #2f2f2f;
+  padding: 15px;
+}
+
+.table-title h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container span {
+  color: #8f8f8f;
+  text-align: right;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: #ffffff;
+  padding: 10px 15px;
+  border: none;
+  transition: background-color 225ms ease-out;
+}
+
+button.primary {
+  background-color: #147eff;
+}
+button.primary:hover {
+  background-color: #5da8ff;
+}
+button.primary:active {
+  background-color: #005ecb;
+}
+
+button.danger {
+  background-color: #d11800;
+}
+button.danger:hover {
+  background-color: #ff4333;
+}
+button.danger:active {
+  background-color: #a00000;
+}
+
+.table-concept table {
+  background-color: #ffffff;
+  font-size: 16px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-concept th {
+  color: #ffffff;
+  background-color: #8f8f8f;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid #d8d8d8;
+  position: sticky;
+  top: 0;
+}
+
+.table-concept td {
+  padding: 15px;
+  border: solid 1px #d8d8d8;
+}
+
+.table-concept tbody tr:nth-child(even) {
+  background-color: #e0e0e0;
+}
+
+.table-concept tbody tr:hover {
+  background-color: #d0d0d0;
+}
+
+.pagination {
+  background-color: #8f8f8f;
+  width: 100%;
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+}
+
+.pagination label {
+  color: #ffffff;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #8f8f8f;
+}
+
+.pagination label.active {
+  background-color: #6e6e6e;
+  cursor: default;
+}
+
+.pagination label.disabled {
+  background-color: #b0b0b0;
+  cursor: default;
+}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="table-concept">
+            <div id="table-content"></div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+    
+    <script>
+        const ITEMS_COUNT = 95;
+        const DATA_COUNT = 20;
+        let currentPage = 0;
+        let itemsCount = Math.ceil(ITEMS_COUNT / DATA_COUNT);
+        
+        function renderTable(page) {
+            let start = page * DATA_COUNT + 1;
+            let end = Math.min((page + 1) * DATA_COUNT, ITEMS_COUNT);
+            let tableHTML = `<div class='table-display'>Showing ${start} to ${end} of ${ITEMS_COUNT} items</div>`;
+            tableHTML += `<table><thead><tr><th></th><th>No</th><th>Title</th><th>Category</th><th>Description</th><th>PS Number</th><th>Theme</th></tr></thead><tbody>`;
+            
+            for (let i = start; i <= end; i++) {
+                tableHTML += `<tr>
+                    <td><input type='checkbox'></td>
+                    <td>${i}</td>
+                    <td>This is Item number 1-${i}</td>
+                    <td>This is Item number 2-${i}</td>
+                    <td>This is Item number 3-${i}</td>
+                    <td>This is Item number 4-${i}</td>
+                    <td>This is Item number 5-${i}</td>
+                </tr>`;
+            }
+            tableHTML += `</tbody></table>`;
+            document.getElementById("table-content").innerHTML = tableHTML;
+            renderPagination();
+        }
+        
+        function renderPagination() {
+            let paginationHTML = `<label class='${currentPage === 0 ? "disabled" : ""}' onclick='changePage(${currentPage - 1})'>&laquo; Previous</label>`;
+            for (let i = 0; i < itemsCount; i++) {
+                paginationHTML += `<label class='${i === currentPage ? "active" : ""}' onclick='changePage(${i})'>${i + 1}</label>`;
+            }
+            paginationHTML += `<label class='${currentPage === itemsCount - 1 ? "disabled" : ""}' onclick='changePage(${currentPage + 1})'>Next &raquo;</label>`;
+            document.getElementById("pagination").innerHTML = paginationHTML;
+        }
+        
+        function changePage(page) {
+            if (page >= 0 && page < itemsCount) {
+                currentPage = page;
+                renderTable(currentPage);
+            }
+        }
+        
+        renderTable(currentPage);
+    </script>
+</body>
+</html>
