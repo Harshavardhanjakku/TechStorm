@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Techstorm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+        iframe {
+            border: none;
+            display: block;
+            width: 100%;
+        }
+        .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60vh; /* Adjust height to match */
+      padding: 80px 10%; /* Responsive padding */
+  }
+  .hero-text {
+      max-width: 550px;
+  }
+  .hero-text h5 {
+      font-size: 3rem; /* Large heading */
+      font-weight: 700;
+  }
+  .hero-text p {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+  }
+  .hero-text a {
+      font-size: 1.1rem;
+      padding: 12px 25px;
+      border-radius: 6px;
+  }
+  .hero-image img {
+      max-width: 100%;
+      height: auto;
+  }
+  @media (max-width: 992px) {
+      .hero-section {
+          flex-direction: column;
+          text-align: center;
+      }
+      .hero-text {
+          max-width: 100%;
+          margin-bottom: 30px;
+      }
+  }
+ /* Navbar Styling */
+.navbar-nav .nav-link {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Hover Effect - Blue Underline */
+.navbar-nav .nav-link:hover, 
+.navbar-nav .nav-link:focus {
+    color: #007bff !important;
+}
+
+.navbar-nav .nav-link::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #007bff;
+    transition: width 0.3s ease-in-out;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+ 
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+}
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+  padding-top: 2%;
+}
+.footer-col{
+   width: 25%;
+   padding: 10px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #266ed3;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fs-3 text-white" href="#">Techstorm</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav text-center">
+                <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#hero">About us</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#timeline">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#domains">Domains</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#problemstatements">Problem Statements</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#myfooter">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+
+  <div class="container hero-section" id="hero">
+    <div class="hero-text">
+        <h5>Welcome to the Ultimate Hackathon</h5>
+        <p>Join us in an innovative journey to solve real-world problems!</p>
+        <a class="btn btn-primary" href="https://forms.gle/ZnzTiEu6bcgq72KH9" target="_blank">Register Here</a>
+    </div>
+    <div class="hero-image">
+        <img src="homeimage.jpg" alt="Hackathon image" class="img-fluid">
+    </div>
+</div>
+  <section id="timeline">
+    <iframe src="timeline.html" height="850px"></iframe>
+  </section>
+
+  <section id="domains">
+    <iframe src="card.html" height="600px"></iframe>
+  </section>
+
+  <section id="problemstatements">
+    <iframe src="ps.html" height="600px"></iframe>
+  </section>
+<section id="myfooter">
+  <footer class="footer">
+  	 <div class="container">
+  	 	<div class="row">
+  	 		<div class="footer-col">
+  	 			<h4>Collabarations</h4>
+  	 			<ul>
+  	 				<li><a href="#">Coding Club</a></li>
+  	 				<li><a href="#">CSI </a></li>
+  	 				<li><a href="#">Design Team</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>Contact </h4>
+  	 			<ul>
+  	 				<li><a href="https://www.gdeepak.com/" target="_blank">Dr. Deepak Garg (VC)</a></li>
+  	 				<li><a href="https://sru.edu.in/faculty/FacultyProfile/559b79589dde2c76ea481015a6204eff65cc3c116f6028e42201ea241c8f925448de9222a5bba181834ecba98d0ef05dc541cea52876ec5fcdbea62c494eed95nM.gOr0iLWBiXH5nKFWdfkg6c4QKgBoKMNyMBdNLboc-" target="_blank">Dr. Sheshikala Martha (HOD)</a></li>
+  	 				<li><a href="https://sru.edu.in/faculty/FacultyProfile/44e024f6bd2773b8d571866e0b8f78adc3d209b4b889b244f0782dfa257e4e5c514a329fe774ad326e83c2b53050ca4c9e32446d7b01bf57274c652a7221cadecjw~jvKk21goL6L14Yrgk3EywrVGCpdWT.620xyTf3o-" target="_blank">Dr. Indrajeet Gupta (Dean)</a></li>
+            <li><a href="https://sru.edu.in/faculty/FacultyProfile/81f0f85685ff272dae8125bb04bea7436263da77ffb017d53d164855be55f248f8ddc0839f81a6746a6d6333baf875bed180321db9a8998512593f808e989eadZDx3GNG4SuWuGzDLYEmQDBrD2XuJujnQGX~IpPLycTc-" target="_blank">Dr. Suresh Kumar Mandala (Assistant Professor)</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>Designer & Core members</h4>
+  	 			<ul>
+  	 				<li><a href="https://harshavardhanjakku.github.io/MyPortfolio/" target="_blank">Jakku Harshavardhan (Designer & Secretary)</a></li>
+  	 				<li><a href="https://www.linkedin.com/in/shreya-kandhagatla-77183327a/" target="_blank">Kandhagatla Shreya (Chair)</a></li>
+  	 				<li><a href="https://www.linkedin.com/in/chitraleka-golla-4751a427b/" target="_blank">Golla Chitraleka (Vice Chair)</a></li>
+             <li><a href="https://www.linkedin.com/in/vyshnavi-chandupatla/" target="_blank">Chandupatla Vyshnavi (Treasurer)</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>Follow Us</h4>
+  	 			<div class="social-links">
+  	 				<a href="#"><i class="fab fa-facebook-f"></i></a>
+  	 				<a href="#"><i class="fab fa-twitter"></i></a>
+  	 				<a href="#"><i class="fab fa-instagram"></i></a>
+  	 				<a href="#"><i class="fab fa-linkedin-in"></i></a>
+  	 			</div>
+  	 		</div>
+  	 	</div>
+  	 </div>
+  </footer>
+</section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+    
