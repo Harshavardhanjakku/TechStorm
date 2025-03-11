@@ -88,99 +88,134 @@
     width: 100%;
 }
  
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-body{
-	line-height: 1.5;
-	font-family: 'Poppins', sans-serif;
-}
-*{
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
-}
-.container{
-	max-width: 1170px;
-	margin:auto;
-}
-.row{
-	display: flex;
-	flex-wrap: wrap;
-}
-ul{
-	list-style: none;
-}
-.footer{
-	background-color: #24262b;
-  padding-top: 2%;
-}
-.footer-col{
-   width: 25%;
-   padding: 10px;
-}
-.footer-col h4{
-	font-size: 18px;
-	color: #ffffff;
-	text-transform: capitalize;
-	margin-bottom: 35px;
-	font-weight: 500;
-	position: relative;
-}
-.footer-col h4::before{
-	content: '';
-	position: absolute;
-	left:0;
-	bottom: -10px;
-	background-color: #e91e63;
-	height: 2px;
-	box-sizing: border-box;
-	width: 50px;
-}
-.footer-col ul li:not(:last-child){
-	margin-bottom: 10px;
-}
-.footer-col ul li a{
-	font-size: 16px;
-	text-transform: capitalize;
-	color: #ffffff;
-	text-decoration: none;
-	font-weight: 300;
-	color: #266ed3;
-	display: block;
-	transition: all 0.3s ease;
-}
-.footer-col ul li a:hover{
-	color: #ffffff;
-	padding-left: 8px;
-}
-.footer-col .social-links a{
-	display: inline-block;
-	height: 40px;
-	width: 40px;
-	background-color: rgba(255,255,255,0.2);
-	margin:0 10px 10px 0;
-	text-align: center;
-	line-height: 40px;
-	border-radius: 50%;
-	color: #ffffff;
-	transition: all 0.5s ease;
-}
-.footer-col .social-links a:hover{
-	color: #24262b;
-	background-color: #ffffff;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
 }
 
-/*responsive*/
-@media(max-width: 767px){
-  .footer-col{
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1170px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+ul {
+  list-style: none;
+}
+
+.footer {
+  background-color: #24262b;
+  padding: 50px 0;
+}
+
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer-col h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  background-color: #e91e63;
+  height: 2px;
+  width: 50px;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  font-size: 16px;
+  color: #266ed3;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 8px;
+}
+
+/* Nested UL Styling */
+.footer-col ul ul {
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+.footer-col ul ul li a {
+  font-size: 15px;
+  color: #87cefa;
+}
+
+/* Social Icons */
+.footer-col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+  background-color: #ffffff;
+  color: #24262b;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .footer-col {
     width: 50%;
     margin-bottom: 30px;
+  }
 }
-}
-@media(max-width: 574px){
-  .footer-col{
+
+@media (max-width: 576px) {
+  .footer-col {
     width: 100%;
+    margin-bottom: 30px;
+  }
 }
+.icon-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 10px;
 }
+
   </style>
 </head>
 <body>
@@ -228,30 +263,63 @@ ul{
   <footer class="footer">
   	 <div class="container">
   	 	<div class="row">
-  	 		<div class="footer-col">
-  	 			<h4>Collabarations</h4>
-  	 			<ul>
-  	 				<li><a href="#">Coding Club</a></li>
-  	 				<li><a href="#">CSI </a></li>
-  	 				<li><a href="#">Design Team</a></li>
-  	 			</ul>
-  	 		</div>
+        <div class="footer-col">
+          <h4>Collaborations</h4>
+          <ul>
+            <li>
+              <a href="#">Coding Club</a>
+              <ul>
+                <li>
+                  <a href="#">
+                    <img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />
+                    Umesh Chandra
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />
+                    Umesh Chandra
+                  </a>
+                </li>
+              </ul>
+            </li>
+        
+            <li>
+              <a href="#">CSI</a>
+              <ul>
+                <li>
+                  <a href="#">
+                    <img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />
+                    Umesh Chandra
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />
+                    Umesh Chandra
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        
   	 		<div class="footer-col">
   	 			<h4>Contact </h4>
   	 			<ul>
-  	 				<li><a href="https://www.gdeepak.com/" target="_blank">Dr. Deepak Garg (VC)</a></li>
-  	 				<li><a href="https://sru.edu.in/faculty/FacultyProfile/559b79589dde2c76ea481015a6204eff65cc3c116f6028e42201ea241c8f925448de9222a5bba181834ecba98d0ef05dc541cea52876ec5fcdbea62c494eed95nM.gOr0iLWBiXH5nKFWdfkg6c4QKgBoKMNyMBdNLboc-" target="_blank">Dr. Sheshikala Martha (HOD)</a></li>
-  	 				<li><a href="https://sru.edu.in/faculty/FacultyProfile/44e024f6bd2773b8d571866e0b8f78adc3d209b4b889b244f0782dfa257e4e5c514a329fe774ad326e83c2b53050ca4c9e32446d7b01bf57274c652a7221cadecjw~jvKk21goL6L14Yrgk3EywrVGCpdWT.620xyTf3o-" target="_blank">Dr. Indrajeet Gupta (Dean)</a></li>
-            <li><a href="https://sru.edu.in/faculty/FacultyProfile/81f0f85685ff272dae8125bb04bea7436263da77ffb017d53d164855be55f248f8ddc0839f81a6746a6d6333baf875bed180321db9a8998512593f808e989eadZDx3GNG4SuWuGzDLYEmQDBrD2XuJujnQGX~IpPLycTc-" target="_blank">Dr. Suresh Kumar Mandala (Assistant Professor)</a></li>
+  	 				<li><a href="https://www.gdeepak.com/" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Dr. Deepak Garg (VC)</a></li>
+  	 				<li><a href="https://sru.edu.in/faculty/FacultyProfile/559b79589dde2c76ea481015a6204eff65cc3c116f6028e42201ea241c8f925448de9222a5bba181834ecba98d0ef05dc541cea52876ec5fcdbea62c494eed95nM.gOr0iLWBiXH5nKFWdfkg6c4QKgBoKMNyMBdNLboc-" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Dr. Sheshikala Martha (HOD)</a></li>
+  	 				<li><a href="https://sru.edu.in/faculty/FacultyProfile/44e024f6bd2773b8d571866e0b8f78adc3d209b4b889b244f0782dfa257e4e5c514a329fe774ad326e83c2b53050ca4c9e32446d7b01bf57274c652a7221cadecjw~jvKk21goL6L14Yrgk3EywrVGCpdWT.620xyTf3o-" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Dr. Indrajeet Gupta (Dean)</a></li>
+            <li><a href="https://sru.edu.in/faculty/FacultyProfile/81f0f85685ff272dae8125bb04bea7436263da77ffb017d53d164855be55f248f8ddc0839f81a6746a6d6333baf875bed180321db9a8998512593f808e989eadZDx3GNG4SuWuGzDLYEmQDBrD2XuJujnQGX~IpPLycTc-" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Dr. Suresh Kumar Mandala (Assistant Professor)</a></li>
   	 			</ul>
   	 		</div>
   	 		<div class="footer-col">
   	 			<h4>Designer & Core members</h4>
   	 			<ul>
-  	 				<li><a href="https://harshavardhanjakku.github.io/MyPortfolio/" target="_blank">Jakku Harshavardhan (Designer & Secretary)</a></li>
-  	 				<li><a href="https://www.linkedin.com/in/shreya-kandhagatla-77183327a/" target="_blank">Kandhagatla Shreya (Chair)</a></li>
-  	 				<li><a href="https://www.linkedin.com/in/chitraleka-golla-4751a427b/" target="_blank">Golla Chitraleka (Vice Chair)</a></li>
-             <li><a href="https://www.linkedin.com/in/vyshnavi-chandupatla/" target="_blank">Chandupatla Vyshnavi (Treasurer)</a></li>
+  	 				<li><a href="https://harshavardhanjakku.github.io/MyPortfolio/" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Jakku Harshavardhan (Designer & Secretary)</a></li>
+  	 				<li><a href="https://www.linkedin.com/in/shreya-kandhagatla-77183327a/" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Kandhagatla Shreya (Chair)</a></li>
+  	 				<li><a href="https://www.linkedin.com/in/chitraleka-golla-4751a427b/" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Golla Chitraleka (Vice Chair)</a></li>
+             <li><a href="https://www.linkedin.com/in/vyshnavi-chandupatla/" target="_blank"><img src="https://ui-avatars.com/api/?name=Umesh+Chandra" alt="icon" class="icon-img" />Chandupatla Vyshnavi (Treasurer)</a></li>
   	 			</ul>
   	 		</div>
   	 		<div class="footer-col">
