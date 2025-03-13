@@ -8,7 +8,33 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+  .download-btn {
+    color: #0000FF;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.download-label {
+    background-image: linear-gradient(45deg, #ff0000, #ff7300, #ff0, #0f0, #00f, #f0f);
+    background-size: 300% 300%;
+    color: white;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    animation: gradientAnimation 3s infinite;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
   body {
     --color: rgba(30, 30, 30);
     --bgColor: rgba(245, 245, 245);
