@@ -5,78 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Problem statements</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            text-align: center;
-        }
-        .card {
-            background: #fff;
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        h2 {
-            color: #333;
-        }
-        .table-container {
-            width: 100%;
-            max-height: 500px; /* Set a fixed height */
-            overflow-y: auto; /* Enable scrolling within the table */
-            position: relative;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background: #fff;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd; /* Added vertical and horizontal lines */
-        }
-        th {
-            background-color: #4a79af;
-            color: #fff;
-            text-transform: uppercase;
-            position: sticky;
-            top: 0; /* Keeps headers visible when scrolling */
-            z-index: 2;
-        }
-        tr:nth-child(odd) {
-            background-color: #e3eaf6;
-        }
-        tr:nth-child(even) {
-            background-color: #f8f9fc;
-        }
-        tr:hover {
-            background-color: #d6dff1;
-        }
-        .pagination {
-            margin-top: 20px;
-        }
-        .pagination button {
-            padding: 8px 12px;
-            margin: 5px;
-            border: none;
-            background: #4a79af;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .pagination button:disabled {
-            background: #bbb;
-            cursor: not-allowed;
-        }
-        select {
+       /* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+/* Card Styling */
+.card {
+    background: #fff;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+}
+
+/* Heading Styling */
+h2 {
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Table Container (Responsive Scroll) */
+.table-container {
+    width: 100%;
+    max-height: 500px;
+    overflow-x: auto;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    font-size: 1rem;
+}
+
+/* Table Header */
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4a79af;
+    color: #fff;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Alternate Row Colors */
+tr:nth-child(odd) {
+    background-color: #e3eaf6;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fc;
+}
+
+tr:hover {
+    background-color: #d6dff1;
+}
+
+/* Pagination Styling */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Dropdown Styling */
+select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #f9f9f9;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -92,33 +130,61 @@ select:focus {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+/* Label Styling */
 label {
     font-weight: bold;
     margin-right: 10px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
-.pagination button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    margin: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Responsive Styling */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .card {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 0.875rem;
+    }
+
+    .pagination button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    select {
+        font-size: 12px;
+        padding: 6px;
+    }
 }
 
-.pagination button:hover {
-    background-color: #0056b3;
-}
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1rem;
+    }
 
-.pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
+    th, td {
+        padding: 8px;
+        font-size: 0.75rem;
+    }
 
-    </style>
+    .pagination button {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    select {
+        font-size: 11px;
+        padding: 5px;
+    }
+}
+</style>
     
 
 </head>
