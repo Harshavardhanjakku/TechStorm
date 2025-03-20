@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Data Table</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Card Styling */
+        .card {
+            background: #fff;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Heading Styling */
+        h2 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        /* Table Container (Responsive Scroll) */
+        .table-container {
+            width: 100%;
+            max-height: 500px;
+            overflow-x: auto;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #fff;
+            font-size: 1rem;
+        }
+
+        /* Table Header */
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4a79af;
+            color: #fff;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        /* Alternate Row Colors */
+        tr:nth-child(odd) {
+            background-color: #e3eaf6;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fc;
+        }
+
+        tr:hover {
+            background-color: #d6dff1;
+        }
+
+        /* Pagination Styling */
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Dropdown Styling */
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            outline: none;
+        }
+
+        select:hover {
+            background-color: #f1f1f1;
+        }
+
+        select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Label Styling */
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Team Data</h2>
+
+    <!-- Filter Dropdown -->
+    <label for="domain">Select Domain:</label>
+    <select id="domain" onchange="filterTable()">
+        <option value="All">All</option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Health">Health</option>
+        <option value="IOT">IOT</option>
+        <option value="Cybersecurity">Cybersecurity</option>
+        <option value="Student Innovation">Student Innovation</option>
+    </select>
+
+    <div class="table-container">
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Domain</th>
+                    <th>Team ID</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination"></div>
+</div>
+
+<script>
+    const data = {
+        "Agriculture": ["TA01", "TA02", "TA06", "TA07", "TA09", "TA10", "TA11", "TA14"],
+        "Health": ["TH01", "TH03", "TH05", "TH06", "TH07", "TH08", "TH10", "TH14", "TH16"],
+        "IOT": ["TI01", "TI02", "TI04", "TI05", "TI07"],
+        "Cybersecurity": ["TC01", "TC03", "TC04", "TC05"],
+        "Student Innovation": ["TI02", "TI03", "TI04", "TI05", "TI07", "TI10", "TI11", "TI12", "TI13", "TI15", "TI16", "TI17", "TI19", "TI20", "TI23", "TI26", "TI28", "TI31", "TI32", "TI33", "TI35", "TI39", "TI40", "TI42", "TI44"]
+    };
+
+    const rowsPerPage = 10;
+    let currentPage = 1;
+    let filteredData = [];
+
+    function loadTableData() {
+        const tableBody = document.querySelector("#data-table tbody");
+        tableBody.innerHTML = "";
+
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        const pageData = filteredData.slice(start, end);
+
+        pageData.forEach((item, index) => {
+            const row = `<tr>
+                <td>${start + index + 1}</td>
+                <td>${item.domain}</td>
+                <td>${item.teamId}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+
+        renderPagination();
+    }
+
+    function filterTable() {
+        const selectedDomain = document.getElementById("domain").value;
+
+        filteredData = [];
+        if (selectedDomain === "All") {
+            for (const domain in data) {
+                data[domain].forEach(teamId => {
+                    filteredData.push({ domain, teamId });
+                });
+            }
+        } else {
+            data[selectedDomain].forEach(teamId => {
+                filteredData.push({ domain: selectedDomain, teamId });
+            });
+        }
+
+        currentPage = 1;
+        loadTableData();
+    }
+
+    function renderPagination() {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+            pagination.innerHTML += `
+                <button onclick="goToPage(${i})" ${i === currentPage ? 'style="background-color:#0056b3"' : ''}>
+                    ${i}
+                </button>
+            `;
+        }
+    }
+
+    function goToPage(page) {
+        currentPage = page;
+        loadTableData();
+    }
+
+    // Initialize table
+    filterTable();
+</script>
+
+</body>
+</html>

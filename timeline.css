@@ -220,3 +220,46 @@
   .credits a {
     color: var(--color);
   }
+/* Anchor Tag Styling */
+a.custom-link {
+  color: #ff0000; /* Bright red */
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+  animation: flashingText 1s infinite alternate;
+}
+
+/* Hover Effect */
+a.custom-link:hover {
+  color: #cc0000; /* Darker red on hover */
+}
+
+/* Underline Effect */
+a.custom-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: #ff0000;
+  transition: transform 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+a.custom-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Flashing Effect */
+@keyframes flashingText {
+  from {
+      color: #ff0000;
+  }
+  to {
+      color: #ff4d4d;
+  }
+}
