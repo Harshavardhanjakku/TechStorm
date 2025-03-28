@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team List with Pagination & Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4a79af;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fc;
+        }
+        tr:hover {
+            background-color: #d6dff1;
+        }
+        .pagination {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        select, input {
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Team List</h2>
+
+    <!-- Filter and Search -->
+    <label for="domainFilter">Filter by Domain: </label>
+    <select id="domainFilter" onchange="filterTable()">
+        <option value="all">All</option>
+    </select>
+
+    <input type="text" id="search" placeholder="Search teams..." onkeyup="filterTable()">
+
+    <!-- Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Domain</th>
+                <th>Team ID</th>
+                <th>Team Name</th>
+            </tr>
+        </thead>
+        <tbody id="teamTable"></tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <button onclick="prevPage()" id="prevBtn">Previous</button>
+        <span id="pageInfo"></span>
+        <button onclick="nextPage()" id="nextBtn">Next</button>
+    </div>
+</div>
+
+<script>
+    const teams = [
+    { domain: "Agriculture", id: "TA10", name: "AgriConnect" },
+    { domain: "Agriculture", id: "TA02", name: "Teck Knights" },
+    { domain: "Agriculture", id: "TA07", name: "AIlluminati" },
+    { domain: "Health", id: "TH07", name: "Quad squad" },
+    { domain: "Health", id: "TH03", name: "Coders" },
+    { domain: "Health", id: "TH08", name: "Tech Titans" },
+    { domain: "Health", id: "TH06", name: "Zero Day Squad" },
+    { domain: "Health", id: "TH01", name: "Squid Gamers" },
+    { domain: "Health", id: "TH05", name: "TechTitans" },
+    { domain: "Health", id: "TH10", name: "Girls Wanna Code" },
+    { domain: "Health", id: "TH14", name: "Cognitive Chaos" },
+    { domain: "IOT", id: "TI05", name: "BLINDERS" },
+    { domain: "IOT", id: "TI01", name: "SD Saga" },
+    { domain: "IOT", id: "TI02", name: "Tech" },
+    { domain: "Cybersecurity", id: "TC01", name: "Nexus" },
+    { domain: "Cybersecurity", id: "TC04", name: "Neural Nexus" },
+    { domain: "Cybersecurity", id: "TC05", name: "Tech Titans" },
+    { domain: "Innovation", id: "TI26", name: "InnoHack" },
+    { domain: "Innovation", id: "TI35", name: "DIGITALCARD" },
+    { domain: "Innovation", id: "TI28", name: "Hackers' Hub" },
+    { domain: "Innovation", id: "TI02", name: "Code Spark" },
+    { domain: "Innovation", id: "TI39", name: "Alpha" },
+    { domain: "Innovation", id: "TI05", name: "Notenest" },
+    { domain: "Innovation", id: "TI11", name: "Superlatives" },
+    { domain: "Innovation", id: "TI40", name: "Epic Failures" },
+    { domain: "Innovation", id: "TI33", name: "CHALLENGERS" },
+    { domain: "Innovation", id: "TI04", name: "Ultra-B" },
+    { domain: "Innovation", id: "TI31", name: "Blue Team" },
+    { domain: "Innovation", id: "TI32", name: "Tech_5" },
+    { domain: "Innovation", id: "TI10", name: "Code Wizards" },
+    { domain: "Innovation", id: "TI12", name: "ERROR-404" },
+    { domain: "Innovation", id: "TI13", name: "Cryptic Code" },
+    { domain: "Innovation", id: "TI44", name: "5 Dimensional Coders" },
+    { domain: "Innovation", id: "TI17", name: "TECH TITANS" },
+    { domain: "Innovation", id: "TI20", name: "Vrindha&Co" },
+    { domain: "Innovation", id: "TI23", name: "Binary Brains" },
+    { domain: "Innovation", id: "TI19", name: "Hackfinity" },
+    { domain: "Innovation", id: "TI15", name: "Can Do Crew" }
+];
+
+
+    let currentPage = 1;
+    const rowsPerPage = 5;
+    let filteredTeams = [...teams];
+
+    function displayTable(data) {
+        const tableBody = document.getElementById("teamTable");
+        tableBody.innerHTML = "";
+        let start = (currentPage - 1) * rowsPerPage;
+        let paginatedItems = data.slice(start, start + rowsPerPage);
+
+        paginatedItems.forEach((team, index) => {
+            let row = `<tr><td>${start + index + 1}</td><td>${team.domain}</td><td>${team.id}</td><td>${team.name}</td></tr>`;
+            tableBody.innerHTML += row;
+        });
+
+        document.getElementById("pageInfo").innerText = `Page ${currentPage} of ${Math.ceil(data.length / rowsPerPage)}`;
+
+        document.getElementById("prevBtn").disabled = currentPage === 1;
+        document.getElementById("nextBtn").disabled = currentPage === Math.ceil(data.length / rowsPerPage);
+    }
+
+    function filterTable() {
+        const selectedDomain = document.getElementById("domainFilter").value;
+        const searchQuery = document.getElementById("search").value.toLowerCase();
+
+        filteredTeams = teams.filter(team =>
+            (selectedDomain === "all" || team.domain === selectedDomain) &&
+            (team.id.toLowerCase().includes(searchQuery) || team.name.toLowerCase().includes(searchQuery))
+        );
+
+        currentPage = 1;
+        displayTable(filteredTeams);
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayTable(filteredTeams);
+        }
+    }
+
+    function nextPage() {
+        if (currentPage < Math.ceil(filteredTeams.length / rowsPerPage)) {
+            currentPage++;
+            displayTable(filteredTeams);
+        }
+    }
+
+    function populateDropdown() {
+        const domainSet = new Set(teams.map(team => team.domain));
+        const domainFilter = document.getElementById("domainFilter");
+
+        domainSet.forEach(domain => {
+            let option = document.createElement("option");
+            option.value = domain;
+            option.innerText = domain;
+            domainFilter.appendChild(option);
+        });
+    }
+
+    populateDropdown();
+    filterTable();
+</script>
+
+</body>
+</html>

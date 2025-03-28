@@ -4,139 +4,259 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Data Table</title>
-    <style>
-       body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            text-align: center;
-        }
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
-        /* Card Styling */
-        .card {
-            background: #fff;
-            width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            position: relative;
-        }
+/* Card Styling */
+.card {
+    background: #fff;
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+}
 
-        /* Heading Styling */
-        h2 {
-            color: #333;
-            font-size: 1.5rem;
-        }
+/* Heading Styling */
+h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
 
-        /* Table Container (Responsive Scroll) */
-        .table-container {
-            width: 100%;
-            max-height: 500px;
-            overflow-x: auto;
-            overflow-y: auto;
-            position: relative;
-        }
+/* Table Container (Responsive Scroll) */
+.table-container {
+    width: 100%;
+    max-height: 500px;
+    overflow-x: auto;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background: #fff;
-            font-size: 1rem;
-        }
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    font-size: 1rem;
+}
 
-        /* Table Header */
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
+/* Table Header */
+th, td {
+    padding: 14px;
+    text-align: left;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+}
 
-        th {
-            background-color: #4a79af;
-            color: #fff;
-            text-transform: uppercase;
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
+th {
+    background-color: #4a79af;
+    color: #fff;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
 
-        /* Alternate Row Colors */
-        tr:nth-child(odd) {
-            background-color: #e3eaf6;
-        }
+/* Alternate Row Colors */
+tr:nth-child(odd) {
+    background-color: #e3eaf6;
+}
 
-        tr:nth-child(even) {
-            background-color: #f8f9fc;
-        }
+tr:nth-child(even) {
+    background-color: #f8f9fc;
+}
 
-        tr:hover {
-            background-color: #d6dff1;
-        }
+tr:hover {
+    background-color: #d6dff1;
+    transition: background 0.3s ease-in-out;
+}
 
-        /* Pagination Styling */
-        .pagination {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
+/* Pagination Styling */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
 
-        .pagination button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            margin: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 14px;
-        }
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
 
-        .pagination button:hover {
-            background-color: #0056b3;
-        }
+.pagination button:hover {
+    background-color: #0056b3;
+}
 
-        .pagination button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
 
-        /* Dropdown Styling */
-        select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            outline: none;
-        }
+/* Dropdown Styling */
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+}
 
-        select:hover {
-            background-color: #f1f1f1;
-        }
+select:hover {
+    background-color: #f1f1f1;
+}
 
-        select:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
-        /* Label Styling */
-        label {
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 14px;
-        }
-    </style>
-</head>
+/* Search Input Styling */
+input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Label Styling */
+label {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .card {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .pagination button {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+
+    select {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .pagination {
+        flex-direction: column;
+    }
+
+    .pagination button {
+        font-size: 12px;
+        padding: 7px 10px;
+    }
+
+    select {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    input[type="text"] {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    .pagination button {
+        font-size: 11px;
+        padding: 6px 9px;
+    }
+
+    select {
+        font-size: 11px;
+        width: 100%;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+    </head>
 <body>
 
 <div class="card">
