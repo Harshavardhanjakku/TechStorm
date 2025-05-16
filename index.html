@@ -8,6 +8,54 @@
     <link rel="icon" href="clublogo.png" type="image/gif">
     <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Prevent Ctrl+U
+      document.addEventListener('keydown', function(e) {
+        // Check for Ctrl+U (view source)
+        if (e.ctrlKey && (e.keyCode === 85 || e.key === 'u' || e.which === 85)) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Prevent F12 key (developer tools)
+        if (e.keyCode === 123 || e.key === 'F12' || e.which === 123) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Prevent Ctrl+Shift+I (developer tools)
+        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.key === 'i' || e.which === 73)) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Prevent Ctrl+Shift+J (developer tools)
+        if (e.ctrlKey && e.shiftKey && (e.keyCode === 74 || e.key === 'j' || e.which === 74)) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // Prevent Ctrl+S (save page)
+        if (e.ctrlKey && (e.keyCode === 83 || e.key === 's' || e.which === 83)) {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Disable right-click context menu
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Disable text selection to prevent copy
+      document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+    });
+  </script>
     <style>
         html, body {
             height: 100%;
@@ -342,7 +390,9 @@ ul {
   </footer>
 </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    
+  </script>
 </body>
 </html>
     
